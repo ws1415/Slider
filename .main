@@ -1,0 +1,53 @@
+final float R = 10; // Fester Wert für Radius der Ellipse
+
+// Klasse Slider
+class Slider { 
+
+  float xMin, xMax; // x min und x max vom Slider
+  float yMin, yMax; // y min und y max vom Slider
+  float x, y; // x und y von der Ellipse
+
+  // Konstruktor vom Slider 
+  Slider(float xMin, float xMax) {
+
+    this.xMin = xMin;
+    this.xMax = xMax;
+    this.yMin = 20-R;
+    this.yMax = 20 + R;
+    
+    x = xMin; //Ellipse x
+    y= (yMin + yMax)/2; //Ellipse y
+  }
+  
+  // Zeichnet Slider
+  void display(){
+    mouse();
+    stroke(0); //linie ist schwarz
+    line(xMin,y,xMax,y); //Zeichnet Linie von xMin bis xMax
+    noStroke(); // deaktiviert stroke
+    fill(124);
+    ellipse(x,y,2*R,2*R); //Ellipse mit Anfang x und y, breite 2*R und höhe 2*R
+  }
+  
+  // Mouse Methode zur bewegung
+  void mouse(){
+    if(mouseX >= xMin && mouseX <= xMax && mouseY >= yMin && mouseY <= yMax){
+      x = mouseX;
+    }
+  }
+  
+}
+
+//Ein Objekt der Klasse wird erzeugt 
+Slider s = new Slider(10,140);
+
+void setup(){
+
+  size(600,800); //Fenstergröße
+  
+}
+
+void draw(){
+  background(255);
+  s.display(); //zeichnet ellipse auf dem objekt
+}
